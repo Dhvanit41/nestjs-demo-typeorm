@@ -5,14 +5,14 @@ import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
   const configService = app.get(ConfigService);
   const port = configService.get('PORT') || '3000';
 
   if (process.env.NODE_ENV !== 'production') {
     const config = new DocumentBuilder()
-      .setTitle('Montech API')
-      .setDescription('APIs for Montech service')
+      .setTitle('API')
+      .setDescription('APIs for service')
       .setVersion('1.0')
       .addBearerAuth()
       .build();

@@ -2,6 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
+import { AnimalQueryParamsDto } from '../dtos/add-user-role.dto';
 
 @Injectable()
 export class PetfinderService {
@@ -16,14 +17,14 @@ export class PetfinderService {
     this.API_SECRET = this.configService.get('API_SECRET');
   }
 
-  async getAnimals() {
+  async getAnimals(reqParams: AnimalQueryParamsDto) {
     const { access_token } = await this.requestPetfinderAccessToken();
     const url = '/animals';
-    const response = await this.request({ url, method: 'get' }, access_token);
+    const response = await this.request({ url, method: 'get',params:reqParams }, access_token);
     return response;
   }
 
-  async getAnimal(id:string) {
+  async getAnimal(id: string) {
     const { access_token } = await this.requestPetfinderAccessToken();
     const url = `/animals/${id}`;
     const response = await this.request({ url, method: 'get' }, access_token);
@@ -37,14 +38,14 @@ export class PetfinderService {
     return response;
   }
 
-  async getAnimalType(animalType:string) {
+  async getAnimalType(animalType: string) {
     const { access_token } = await this.requestPetfinderAccessToken();
     const url = `/types/${animalType}`;
     const response = await this.request({ url, method: 'get' }, access_token);
     return response;
   }
 
-  async getAnimalBreedOfGivenType(animalType:string) {
+  async getAnimalBreedOfGivenType(animalType: string) {
     const { access_token } = await this.requestPetfinderAccessToken();
     const url = `/types/${animalType}`;
     const response = await this.request({ url, method: 'get' }, access_token);
@@ -58,7 +59,7 @@ export class PetfinderService {
     return response;
   }
 
-  async getOrganization(id:string) {
+  async getOrganization(id: string) {
     const { access_token } = await this.requestPetfinderAccessToken();
     const url = `/organizations/${id}`;
     const response = await this.request({ url, method: 'get' }, access_token);

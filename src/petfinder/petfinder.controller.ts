@@ -1,6 +1,7 @@
-import { Controller, Get, Param, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Query, Req, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { PetfinderService } from './petfinder.service';
+import { AnimalQueryParamsDto } from 'src/dtos';
 
 @Controller('petfinder')
 @ApiTags('Petfinder')
@@ -8,8 +9,8 @@ import { PetfinderService } from './petfinder.service';
 export class PetfinderController {
   constructor(private petfinderService: PetfinderService) {}
   @Get('/animals')
-  async getAnimals() {
-    return await this.petfinderService.getAnimals();
+  async getAnimals(@Query()reqParams:AnimalQueryParamsDto) {
+    return await this.petfinderService.getAnimals(reqParams);
   }
 
   @Get('/animals/:id')

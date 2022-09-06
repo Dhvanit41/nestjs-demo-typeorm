@@ -43,7 +43,10 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+you will find documentation at http://localhost:PORT/api/
 ```
+
 
 ## Test
 
